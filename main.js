@@ -54,56 +54,63 @@ var score = 0;
 
 
 function kaartclick(clicked){ 
-    console.log('<-- Nextround -->')
-    //Get text from div
-    var kaart_value = document.getElementById(clicked)
-    //Check if kaart_value == prev_kaart
-    
-    console.log('previous card: %s ',previous_kaart.innerText)
-    console.log('current card: %s', kaart_value.innerText)
-    kaart_flip_count += 1
+    return
 
-    if (kaart_value.innerText == previous_kaart.innerText) {
-        console.log('Je hebt 2 kaarten geraden');
-        //remove event listener to always show the cards
-        kaart_value.removeEventListener('click', eventlistener)
-        previous_kaart.removeEventListener('click',eventlistener)
-        
-        previous_kaart.style.backgroundColor = 'blue'
-        console.log(kaart_value)
-        kaart_value.style.background = 'blue'
-
-        score += 1
-    
-        //Check if the score == 3, than you have won
-        if (score == 3){
-            alert('Gefeliciteerd')
-            
-            score = 0;
-        }
-    }
-    //Save card_value in previous_card_value
-    else { 
-        previous_kaart = kaart_value;
-    }
-
-    //Check if 2 cards are fliped, than reset score
-    if (kaart_flip_count == 2){
-        kaart_flip_count = 0;
-        previous_kaart = '';
-    }   
 }
 
 function eventlistener(e){
+    console.log('<-- Next Round -->')
     card = e.currentTarget
-    console.log(card.style.backgroundColor)
-    if (card.style.backgroundColor == "green"){
-        card.style.backgroundColor = 'red'    
-    }
-    else{
-        card.style.backgroundColor = 'green'    
-    }
     
+    console.log('previous card: %s', previous_kaart.innerText)
+    console.log('previous card: %s', card.innerText)
+    //kleur = cardstyle.getPropertyValue('background-color')
+    
+    kaart_flip_count += 1
+
+    card.style.backgroundColor = 'blue'
+    
+    console.log(card.style.backgroundColor)
+
+    
+    //check if 2 cards are flipped
+    if (kaart_flip_count == 2){
+        //Wait 3 seconds, than verify cards
+        setTimeout(function(){
+            if (card.innerText == previous_kaart.innerText) {
+                console.log('Je hebt 2 kaarten geraden');
+                //remove event listener to always show the cards
+                previous_kaart.style.backgroundColor = 'green'
+                
+                card.style.backgroundColor = 'green'
+        
+                score += 1
+            
+                //Check if the score == 3, than you have won
+                if (score == 3){
+                    alert('Gefeliciteerd')
+                    score = 0;
+                }
+                //remove eventlistener
+                card.removeEventListener('click', eventlistener)
+                previous_kaart.removeEventListener('click',eventlistener)
+                
+            }
+            //Save card_value in previous_card_value
+            else { 
+                // return cards
+                card.style.backgroundColor = 'black';
+                previous_kaart.style.backgroundColor = 'black';    
+            }
+            previous_kaart = '';
+            kaart_flip_count = 0;
+        }, 3000)
+        //check if cards are qual    
+    }
+    else {
+        previous_kaart = card;
+    }
+     
 }
 
 var kaart_div = document.getElementsByClassName('kaart');
