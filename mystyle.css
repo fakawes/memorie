@@ -1,0 +1,11 @@
+.kaart{
+    background-color: rgba(229, 231, 121, 0.411);
+    margin-top: 20px;
+    cursor: pointer;
+    text-align: center;
+    background-color: yellow;
+}
+
+.fixed-bottom{
+    background-color:rgba(121, 160, 231, 0.411)
+}
