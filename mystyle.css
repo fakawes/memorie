@@ -3,9 +3,72 @@
     margin-top: 20px;
     cursor: pointer;
     text-align: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    transition: 1s;
     
 }
+.kaart p{
+visibility: hidden;   
+}
 
+.kaart:hover{
+    transition: 1s ;
+    /* transition-timing-function: ease-in-out; */
+    transform: scale(1.1)
+}
+
+
+
+.kaart.click.guess_correct{
+    
+    animation-name: guess_correct;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes guess_correct {
+    from {
+    background-color:black;
+}
+to{
+    background-color: rgb(94, 173, 94);
+}    
+}
+.kaart.click.guess_incorrect {
+    animation-name: guess_incorrect;
+    animation-duration: 3s;  
+    animation-fill-mode: forwards;
+}
+@keyframes guess_incorrect {
+    0% {
+    background-color: blue;
+}
+50%{
+    background-color: rgb(236, 96, 96)
+}
+100%{
+    background-color: black;
+}
+}
+
+.kaart.click{
+    animation-name: clicked;
+    animation-duration: 2s;  
+    animation-fill-mode: forwards;
+}
+
+@keyframes clicked {
+    from {
+    background-color: black
+}
+to{
+    background-color: blue
+}    
+
+}
 .fixed-bottom{
     background-color:rgba(121, 160, 231, 0.411)
 } 
+
+
