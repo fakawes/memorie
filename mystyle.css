@@ -37,7 +37,7 @@ to{
 }
 .kaart.click.guess_incorrect {
     animation-name: guess_incorrect;
-    animation-duration: 3s;  
+    animation-duration: 4s;  
     animation-fill-mode: forwards;
 }
 @keyframes guess_incorrect {
@@ -72,3 +72,6 @@ to{
 } 
 
 
+.hide{
+    display:none;
+}

@@ -18,7 +18,7 @@ Als je een vakje aanklikt draait deze zich om, tot dat er 1 andere is aangeklikt
     Dan wordt er gecheckt of de 2 kaartjes aan elkaar gelijk zijn
 
     Wacht 3 seconden en flip de kaartjes weer terug
- -->
+-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +32,7 @@ Als je een vakje aanklikt draait deze zich om, tot dat er 1 andere is aangeklikt
     
     <title>Memorie</title>
 </head>
-<body onload="loadwords()">
+<body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -40,53 +40,59 @@ Als je een vakje aanklikt draait deze zich om, tot dat er 1 andere is aangeklikt
         </div>
     </nav>
     
-    <div class="Container text-center " >
-        <h1>Dit is een Container</h1>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class='kaart' id='kaart1'>
-                    <p>
-                        
-                    </p> 
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="kaart" id='kaart2'>
-                    <p>
-                        
-                    </p>
-                </div>
-            </div>
-            
-            <div class="col-sm-4">
-                <div class="kaart" id='kaart3'>
-                    <p>
-                        
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="Container text-center ">
 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class='kaart' id='kaart4'>
-                    <p>
-                        
-                    </p> 
+        <button id="start-btn" class="start-btn btn">Start</button>
+        <button id="stop-btn" class="stop-btn btn hide">Stop</button>
+        
+        <div id="card-container" class="hide">
+            
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class='kaart' id='kaart1'>
+                        <p>
+                            
+                        </p> 
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="kaart" id='kaart2'>
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-sm-4">
+                    <div class="kaart" id='kaart3'>
+                        <p>
+                            
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="kaart" id='kaart5'>
-                    <p>
-                        
-                    </p>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class='kaart' id='kaart4'>
+                        <p>
+                            
+                        </p> 
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-4" >
-                <div class="kaart" id='kaart6'>
-                    <p>
-                        
-                    </p>
+                <div class="col-sm-4">
+                    <div class="kaart" id='kaart5'>
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4" >
+                    <div class="kaart" id='kaart6'>
+                        <p>
+                            
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,13 +105,13 @@ Als je een vakje aanklikt draait deze zich om, tot dat er 1 andere is aangeklikt
                 
                 <div class="row">
                     <div class="col-sm-4">
-                        Je 
+                        E-mail 
                     </div>
                     <div class="col-sm-4">
-                        Kanker
+                        Wessel Rooth
                     </div>
                     <div class="col-sm-4">
-                        Moeder
+                        Telefoonnummer
                     </div>
                 </div>
             </div>

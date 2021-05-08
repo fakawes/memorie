@@ -1,10 +1,9 @@
 /* 
-    Javascript 
-    
+    Javascript   
 */
 
 function loadwords() {
-    
+    console.log('nog een keer')
     var kaart_array = new Array();
 
     var kaarten = ['Hond', 'Hond', 'Kat', 'Kat', 'Muis', 'Muis']
@@ -37,30 +36,39 @@ function loadwords() {
 }
 
 
+const startButton = document.getElementById('start-btn')
+const cardContainer= document.getElementById('card-container')
+const stopButton = document.getElementById('stop-btn')
 
-var kaart_flip_count = 0;
-var previous_kaart = '';
 
-var score = 0;
+startButton.addEventListener('click', startGame)
+stopButton.addEventListener('click', stopGame)
 
-/* 
-function kaartclick(clicked){ 
-    return
 
-} */
 
-function sleep(miliseconds){
-    const date = Date.now();
+function startGame(){
+    loadwords()
+    startButton.classList.add('hide')
 
-    let currentDate = null;
-
-    do {
-        currentDate = Date.now();
-
-    }while (currentDate- date < miliseconds)
+    cardContainer.classList.remove('hide')
+    stopButton.classList.remove('hide')
 }
 
+function stopGame(){
+    
+    card.classList.remove('click')
+    
+    card.childNodes[1].style.visibility = 'hidden'
 
+    kaart_flip_count = 0;
+    previous_kaart = '';
+
+    score = 0;
+
+    startButton.classList.remove('hide')
+    cardContainer.classList.add('hide')
+    stopButton.classList.add('hide')
+}
 /* 
 To-do
 
@@ -69,7 +77,10 @@ Doe de animatie waneer je op een div klikt
 Ga doormiddel van een promis door naar de volgende code
 */
 
+var kaart_flip_count = 0;
+var previous_kaart = '';
 
+var score = 0;
 
 function eventlistener(e){
     console.log('<-- Start -->')
@@ -77,149 +88,109 @@ function eventlistener(e){
     
     cardText = card.childNodes[1]
 
-    
+    if (previous_kaart != card){
 
-    cardText.style.visibility = 'visible'
+        cardText.style.visibility = 'visible'
 
-    console.log('card: %s',card.innerText)
-    console.log('prev card: %s', previous_kaart.innerText)
+        console.log('card: %s',card.innerText)
+        console.log('prev card: %s', previous_kaart.innerText)
 
-    //kleur = cardstyle.getPropertyValue('background-color')
-    
-    kaart_flip_count += 1
+        kaart_flip_count += 1
 
-    card.classList.add('click')
-    
-    
-    prevList = previous_kaart.classList
-    
-    var cardAnimation = card.getAnimations()[0]
-     
-    cardClick = new Promise(function(resolve, reject) {
-            return  resolve(cardAnimation.finished)
-        });
+        card.classList.add('click')
+        
+        prevList = previous_kaart.classList
+        
+        var cardAnimation = card.getAnimations()[0]
+        
+        cardClick = new Promise(function(resolve, reject) {
+                console.log('In promise')
+                return  resolve(cardAnimation.finished)
+            });
 
-    cardClick.then(
-        function(result){
-            //check if 2 cards are flipped
-            console.log('kaart flip count: %s', kaart_flip_count)
-            if (kaart_flip_count == 2 ){
-            
-                //check if cards are equal
-                if (card.innerText == previous_kaart.innerText) {
-                    //guess correct
-                    //add new classes to activate animation
-                    card.classList.add('guess_correct');
-                    previous_kaart.classList.add('guess_correct');
+        cardClick.then(
+            function(result){
+                //check if 2 cards are flipped
+                console.log('kaart flip count: %s', kaart_flip_count)
+                if (kaart_flip_count == 2 ){
+                
+                    //check if cards are equal
+                    if (card.innerText == previous_kaart.innerText) {
+                        //guess correct
+                        //add new classes to activate animation
+                        card.classList.add('guess_correct');
+                        previous_kaart.classList.add('guess_correct');
 
-                    let correctCard = card.getAnimations()[0]
-                    
-                    correctPromis = new Promise(function(resolve, reject){
-                        return resolve(correctCard.finished)
-                    })
-                    
-                    correctPromis.then(
-                        function(result){
-                                
-                        score += 1
-                        if (score == 3){
-                            alert('gefeliciteerd je hebt gewonnen')
-                        }
+                        let correctCard = card.getAnimations()[0]
+                        
+                        correctPromis = new Promise(function(resolve, reject){
+                            return resolve(correctCard.finished)
+                        })
+                        
+                        correctPromis.then(
+                            function(result){
+                                    
+                            score += 1
+                            if (score == 3){
+                                alert('gefeliciteerd je hebt gewonnen')
+                            }
 
-                        card.removeEventListener('click', eventlistener)
-                        previous_kaart.removeEventListener('click',eventlistener)
+                            card.removeEventListener('click', eventlistener)
+                            previous_kaart.removeEventListener('click',eventlistener)
 
-                        previous_kaart = '';
-                        kaart_flip_count = 0;
-                        console.log('<-- End of success -->')        
-                        }
-                    )
-                }
-                else{
-                    //Guess incorrect
-                    //add new classes to activate animation
-                    card.classList.add('guess_incorrect')
-                    previous_kaart.classList.add('guess_incorrect')
-                    
-                    
-                    console.log('card: %s',card.innerText)
-                    console.log('prev card: %s', previous_kaart.innerText)
-    
-                    let cardAnimation = card.getAnimations()[0]
-                    
-                    //Wait for animation to finish, then return to normal state
-                    returnDefaultStyle = new Promise(function(resolve, reject){
-                        return resolve(cardAnimation.finished)
-                    })
-                    returnDefaultStyle.then(
-                        function(){
-                            
-                            prevCardText = previous_kaart.childNodes[1]
-                            //Make cards not invisible
-                            prevCardText.style.visibility = 'hidden'
-                            cardText.style.visibility = 'hidden'
-                            
-                            card.classList.remove('guess_incorrect','click')
-                            previous_kaart.classList.remove('guess_incorrect','click')
-                            
                             previous_kaart = '';
                             kaart_flip_count = 0;
-                            console.log('<-- End of incorrect animation -->')
+                            console.log('<-- End of success -->')        
+                            }
+                        )
+                    }
+                    else{
+                        //Guess incorrect
+                        //add new classes to activate animation
+                        card.classList.add('guess_incorrect')
+                        previous_kaart.classList.add('guess_incorrect')
+                        console.log('ik ben nu hier')
+                        
+                        console.log('card: %s',card.innerText)
+                        console.log('prev card: %s', previous_kaart.innerText)
+        
+                        let cardAnimation = card.getAnimations()[0]
+                        
+                        //Wait for animation to finish, then return to normal state
+                        returnDefaultStyle = new Promise(function(resolve, reject){
+                            return resolve(cardAnimation.finished)
+                        })
+                        returnDefaultStyle.then(
+                            function(){
+                                
+                                prevCardText = previous_kaart.childNodes[1]
+                                //Make cards not invisible
+                                prevCardText.style.visibility = 'hidden'
+                                cardText.style.visibility = 'hidden'
+                                
+                                card.classList.remove('guess_incorrect','click')
+                                previous_kaart.classList.remove('guess_incorrect','click')
+                                
+                                previous_kaart = '';
+                                kaart_flip_count = 0;
+                                console.log('<-- End of incorrect animation -->')
 
-                        }
-                    )                    
+                            }
+                        )                    
+                    }
+                      
                 }
-                
-                
+                else{
+                    previous_kaart = card;
+                    console.log('<-- End of 1 card clicked -->')
+                }    
+                console.log('<-- Final End -->')
             }
-            else{
-                previous_kaart = card;
-                console.log('<-- End of 1 card clicked -->')
-            }    
-            console.log('<-- Final End -->')
-        }
-    )
-    
-    
-    //check if 2 cards are flipped
-    /* if (kaart_flip_count == 2){
-        
-        if (card.innerText == previous_kaart.innerText) {
-            console.log('Je hebt 2 kaarten geraden');
-            //remove event listener to always show the cards
-            //Cards are correct
-            previous_kaart.classList.add('guess_correct');
-            card.classList.add('guess_correct');
-            score += 1
-        
-            //Check if the score == 3, than you have won
-            if (score == 3){
-                alert('Gefeliciteerd')
-                score = 0;
-            }
-            //remove eventlistener
-            card.removeEventListener('click', eventlistener)
-            previous_kaart.removeEventListener('click',eventlistener)    
-        }
-        //Save card_value in previous_card_value
-        else { 
-            // return cards
-            
-            // card.style.backgroundColor = 'black'
-            // previous_kaart.style.backgroundColor = 'black';    
-            card.classList.add('guess_incorrect')
-            previous_kaart.classList.add('guess_incorrect')
-            
-            console.log('hierzo')
-
-        }
-        previous_kaart = '';
-        kaart_flip_count = 0;
+        )             
     }
     else {
-        previous_kaart = card;
-    } */
-     
+        alert('you cannot click the card you already')
+    }
 }
 
 var kaart_div = document.getElementsByClassName('kaart');
