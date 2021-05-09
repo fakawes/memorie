@@ -3,10 +3,10 @@
 */
 
 function loadwords() {
-    console.log('nog een keer')
+    
     var kaart_array = new Array();
-
-    var kaarten = ['Hond', 'Hond', 'Kat', 'Kat', 'Muis', 'Muis']
+    /* To-Do: leest de bestanden uit de map uit en maak een automatische lijst van */
+    var kaarten = ['dog.jpg', 'dog.jpg', 'kat.jpg', 'kat.jpg', 'muis.jpg', 'muis.jpg']
 
     /*
     array = {} 
@@ -29,9 +29,30 @@ function loadwords() {
     /* Pakk alle <p> tags en plaats hier de nieuwe gecreerde array in */
     var p_tag = document.getElementsByTagName("p")
     
-    for (i in p_tag){
-        p_tag[i].innerHTML = random_array[i]
+    let kaartClass = document.getElementsByClassName('kaart')
+
+    for (i=0; i in kaartClass; i++){
+        cardField = kaartClass[i]
+    
+        imgNode = document.createElement('IMG')
+        
+        imgNode.src = 'img/' + random_array[i]
+        
+        cardField.appendChild(imgNode)
+
     }
+
+    /* 
+    
+    Plan:
+
+    Pak iedere div met class 'kaart'.
+
+    In deze div plaats ik een img veld.
+
+    De naam haal ik op uit een lijst.
+
+    */
 
 }
 
@@ -40,16 +61,18 @@ const startButton = document.getElementById('start-btn')
 const cardContainer= document.getElementById('card-container')
 const stopButton = document.getElementById('stop-btn')
 
-
 startButton.addEventListener('click', startGame)
 stopButton.addEventListener('click', stopGame)
 
-
-
 function startGame(){
     loadwords()
-    startButton.classList.add('hide')
+    console.log('Startgame',previous_kaart)
+    kaart_flip_count = 0;
+    previous_kaart = '';
 
+    score = 0;
+
+    startButton.classList.add('hide')
     cardContainer.classList.remove('hide')
     stopButton.classList.remove('hide')
 }
@@ -58,24 +81,25 @@ function stopGame(){
     
     card.classList.remove('click')
     
-    card.childNodes[1].style.visibility = 'hidden'
+    console.log(card.childNodes)
 
-    kaart_flip_count = 0;
-    previous_kaart = '';
+    card.childNodes[card.childNodes.length -1].style.visibility = 'hidden'
 
-    score = 0;
+    let kaartDivs = document.getElementsByClassName('kaart')
 
+    for(i in kaartDivs){
+        
+        parent = kaartDivs[i]
+        
+        while(parent.firstChild){
+            parent.removeChild(parent.firstChild)
+        }    
+    }
+    
     startButton.classList.remove('hide')
     cardContainer.classList.add('hide')
     stopButton.classList.add('hide')
 }
-/* 
-To-do
-
-Doe de animatie waneer je op een div klikt
-
-Ga doormiddel van een promis door naar de volgende code
-*/
 
 var kaart_flip_count = 0;
 var previous_kaart = '';
@@ -86,11 +110,14 @@ function eventlistener(e){
     console.log('<-- Start -->')
     card = e.currentTarget
     
-    cardText = card.childNodes[1]
+    
+
+    cardImg = card.childNodes[card.childNodes.length -1]
+    console.log('Child Nodes = %s', cardImg)
 
     if (previous_kaart != card){
 
-        cardText.style.visibility = 'visible'
+        cardImg.style.visibility = 'visible'
 
         console.log('card: %s',card.innerText)
         console.log('prev card: %s', previous_kaart.innerText)
@@ -99,12 +126,9 @@ function eventlistener(e){
 
         card.classList.add('click')
         
-        prevList = previous_kaart.classList
-        
         var cardAnimation = card.getAnimations()[0]
         
         cardClick = new Promise(function(resolve, reject) {
-                console.log('In promise')
                 return  resolve(cardAnimation.finished)
             });
 
@@ -113,9 +137,14 @@ function eventlistener(e){
                 //check if 2 cards are flipped
                 console.log('kaart flip count: %s', kaart_flip_count)
                 if (kaart_flip_count == 2 ){
-                
+                    
+
+                    prevCardImg = previous_kaart.childNodes[previous_kaart.childNodes.length -1]
+                    
+                    console.log('prev card IMG: %s', prevCardImg.src)
+                    console.log(' card IMG: %s', cardImg.src)
                     //check if cards are equal
-                    if (card.innerText == previous_kaart.innerText) {
+                    if (cardImg.src == prevCardImg.src) {
                         //guess correct
                         //add new classes to activate animation
                         card.classList.add('guess_correct');
@@ -133,6 +162,7 @@ function eventlistener(e){
                             score += 1
                             if (score == 3){
                                 alert('gefeliciteerd je hebt gewonnen')
+                                document.body.style.backgroundColor = 'green'
                             }
 
                             card.removeEventListener('click', eventlistener)
@@ -149,7 +179,7 @@ function eventlistener(e){
                         //add new classes to activate animation
                         card.classList.add('guess_incorrect')
                         previous_kaart.classList.add('guess_incorrect')
-                        console.log('ik ben nu hier')
+                        
                         
                         console.log('card: %s',card.innerText)
                         console.log('prev card: %s', previous_kaart.innerText)
@@ -166,7 +196,7 @@ function eventlistener(e){
                                 prevCardText = previous_kaart.childNodes[1]
                                 //Make cards not invisible
                                 prevCardText.style.visibility = 'hidden'
-                                cardText.style.visibility = 'hidden'
+                                cardImg.style.visibility = 'hidden'
                                 
                                 card.classList.remove('guess_incorrect','click')
                                 previous_kaart.classList.remove('guess_incorrect','click')
