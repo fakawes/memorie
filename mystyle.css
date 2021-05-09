@@ -29,7 +29,7 @@
 .kaart.click.guess_correct{
     animation-name: guess_correct;
     animation-duration: 2s;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
 }
 
 @keyframes guess_correct {

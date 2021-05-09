@@ -39,7 +39,7 @@ function loadwords() {
         imgNode.src = 'img/' + random_array[i]
         
         cardField.appendChild(imgNode)
-
+        console.log('hierzo')
     }
 
     /* 
@@ -72,6 +72,15 @@ function startGame(){
 
     score = 0;
 
+    var kaart_div = document.getElementsByClassName('kaart');
+    //Add for loop
+    for (i=0; i in kaart_div; i++){    
+        var card = kaart_div[i]
+        console.log(card)
+        card.addEventListener('click', eventlistener)
+        
+    }
+
     startButton.classList.add('hide')
     cardContainer.classList.remove('hide')
     stopButton.classList.remove('hide')
@@ -79,11 +88,9 @@ function startGame(){
 
 function stopGame(){
     
-    card.classList.remove('click')
+    //card.classList.remove('click')
     
-    console.log(card.childNodes)
-
-    card.childNodes[card.childNodes.length -1].style.visibility = 'hidden'
+    //card.childNodes[card.childNodes.length -1].style.visibility = 'hidden'
 
     let kaartDivs = document.getElementsByClassName('kaart')
 
@@ -119,8 +126,8 @@ function eventlistener(e){
 
         cardImg.style.visibility = 'visible'
 
-        console.log('card: %s',card.innerText)
-        console.log('prev card: %s', previous_kaart.innerText)
+        console.log('card: %s',card)
+        console.log('prev card: %s', previous_kaart)
 
         kaart_flip_count += 1
 
@@ -138,7 +145,6 @@ function eventlistener(e){
                 console.log('kaart flip count: %s', kaart_flip_count)
                 if (kaart_flip_count == 2 ){
                     
-
                     prevCardImg = previous_kaart.childNodes[previous_kaart.childNodes.length -1]
                     
                     console.log('prev card IMG: %s', prevCardImg.src)
@@ -223,10 +229,10 @@ function eventlistener(e){
     }
 }
 
-var kaart_div = document.getElementsByClassName('kaart');
-//Add for loop
-for (i=0; i in kaart_div; i++){    
-    var card = kaart_div[i]
-    card.addEventListener('click', eventlistener)
-}
+// var kaart_div = document.getElementsByClassName('kaart');
+// //Add for loop
+// for (i=0; i in kaart_div; i++){    
+//     var card = kaart_div[i]
+//     card.addEventListener('click', eventlistener)
+// }
 
