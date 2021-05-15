@@ -8,8 +8,7 @@
     transition: 1s;
     width: 200px;
     height: 100px; 
-    display: block;
-
+    
     opacity: 0;
     animation: startgame;
     animation-duration: 4s;
@@ -85,16 +84,20 @@
     background-color:rgba(121, 160, 231, 0.411)
 } 
 
+.painting{
+    background-color: red;
+    transition-property: ;
+    transition-duration: 5s, 3s, 5s;
+}
+
 body{
     transition: 1s;
     font-family: Verdana;
     background-color: #50A6C2;
 }
 
-.conatiner.painting{
-    background-color: green;
-    bottom: 0px;
-
+.hide{
+    visibility: hidden;
 }
 
 /* 

@@ -77,13 +77,9 @@ function stopGame(){
     for(i=0; i in kaartDivs; i++){
         
         parent = kaartDivs[i]
-        console.log(i)
-        console.log(parent)
 
         parent.classList.remove('click','guess_correct')
         
-        console.log(parent.classList)
-
         while(parent.firstChild){
             parent.removeChild(parent.firstChild)
         }    
@@ -98,10 +94,10 @@ var previous_kaart = '';
 
 var score = 0;
 
-const kaart1 = document.getElementById('kaart1')
+const kaart1 = document.getElementById('painting1')
 
-kaart1.addEventListener('transitionend', () => {
-    
+kaart1.addEventListener('transitionend', () => {    
+    console.log('transitie gedaan')    
 })
 
 function eventlistener(e){
