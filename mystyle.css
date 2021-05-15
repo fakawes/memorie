@@ -6,81 +6,106 @@
     margin-right: 20px;
     margin-left: 20px;
     transition: 1s;
+    width: 200px;
+    height: 100px; 
+    display: block;
 
-    width: 100%;
-    height: 40%;
-    
+    opacity: 0;
+    animation: startgame;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
 }
+@keyframes startgame {
+    0%{
+        opacity: 0
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .kaart img{
-    visibility: hidden;   
     width: 100%;
     height: 100%;
-    display: inline-block
+    display: inline-block;
+    transition: 1s;
+    opacity: 0;
 }
-
 .kaart:hover{
     transition: 1s ;
-    /* transition-timing-function: ease-in-out; */
     transform: scale(1.1)
 }
 
-
-
-.kaart.click.guess_correct{
+.kaart.click.guess_correct img{
     animation-name: guess_correct;
     animation-duration: 2s;
-    /* animation-fill-mode: forwards; */
+    animation-fill-mode: forwards;
 }
 
 @keyframes guess_correct {
-    from {
-    background-color:#2E2E2E;
+    0% {
+    opacity: 1;
 }
-to{
-    background-color: rgb(94, 173, 94);
+100%{
+    opacity: 0.5;
 }    
 }
-.kaart.click.guess_incorrect {
+.kaart.click.guess_incorrect img{
     animation-name: guess_incorrect;
-    animation-duration: 4s;  
-    animation-fill-mode: forwards;
+    animation-duration: 3s;
+    /* background-color: #2E2E2E; */
+    transition: opacity 3s;
 }
 @keyframes guess_incorrect {
     0% {
-    background-color: #87CEFA;
-}
-50%{
-    background-color: rgb(236, 96, 96)
+    opacity: 1;
 }
 100%{
-    background-color: #2E2E2E;
+    opacity: 0;
 }
 }
 
-.kaart.click{
+.kaart.click img{
     animation-name: clicked;
-    animation-duration: 2s;  
+    animation-duration: 1s;
+    /* visibility: visible; */
+    /* opacity: 1; */
     animation-fill-mode: forwards;
 }
 
 @keyframes clicked {
-    from {
-    background-color: #2E2E2E
-}
-to{
-    background-color: #87CEFA
-}    
-
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1;
+    }    
 }
 .fixed-bottom{
     background-color:rgba(121, 160, 231, 0.411)
 } 
 
-
-.hide{
-    display:none;
-}
 body{
     transition: 1s;
     font-family: Verdana;
     background-color: #50A6C2;
+}
+
+.conatiner.painting{
+    background-color: green;
+    bottom: 0px;
+
+}
+
+/* 
+<-- dont't use it at the time -->
+.m-fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+    }
+.m-fadeIn {
+visibility: visible;
+opacity: 1;
+transition: visibility 0s linear 0s, opacity 300ms;
+} */
