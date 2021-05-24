@@ -1,19 +1,42 @@
+:root{
+    --black: #2E2E2E;
+}
+
 .kaart{
     background-color: #2E2E2E;
     margin-top: 20px;
     cursor: pointer;
     text-align: center;
-    margin-right: 20px;
+    
+    /* margin-right: 20px;
     margin-left: 20px;
+    */
+    margin: auto;
     transition: 1s;
+    
+    /* to-do flexibel maken */
     width: 200px;
     height: 100px; 
-    
+
     opacity: 0;
     animation: startgame;
     animation-duration: 4s;
     animation-fill-mode: forwards;
+
+    overflow: hidden;
+    /* border */
+
+    border: 1px solid;
+    border-radius: 25px;
+
+    box-shadow: 0 0 10px 10px rgba(241, 239, 239, 0.2)
 }
+
+.padding{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
 @keyframes startgame {
     0%{
         opacity: 0
@@ -23,12 +46,23 @@
     }
 }
 
+#card-container{
+    height: 0px;
+    width: 95%;
+    overflow: hidden;
+    transition: height 3s ease-in-out;
+}
+
 .kaart img{
     width: 100%;
     height: 100%;
     display: inline-block;
     transition: 1s;
     opacity: 0;
+
+    object-fit: fill;
+    
+    
 }
 .kaart:hover{
     transition: 1s ;
@@ -84,31 +118,72 @@
     background-color:rgba(121, 160, 231, 0.411)
 } 
 
-.painting{
-    background-color: red;
-    transition-property: ;
-    transition-duration: 5s, 3s, 5s;
-}
+.painting img{    
+    
+    border:  2px solid;
+    
+    border-color:rgba(111, 152, 228, 0.411);
+    width: 100%;
+    height: 500px;
 
+    box-shadow: 0 0 10px 10px rgba(241, 239, 239, 0.2);
+
+    border-radius: 15px
+    
+}
+.painting-container{
+    padding-top: 30px;
+    /* border-top: 1px solid rgba(160, 186, 211, 0.5); */
+    box-shadow: 0 -10px 20px rgba(241, 239, 239, 0.2)
+}
 body{
     transition: 1s;
     font-family: Verdana;
     background-color: #50A6C2;
+    width: 100%;
+    height: 100%;
 }
 
 .hide{
     visibility: hidden;
 }
 
-/* 
-<-- dont't use it at the time -->
-.m-fadeOut {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 300ms, opacity 300ms;
-    }
-.m-fadeIn {
-visibility: visible;
-opacity: 1;
-transition: visibility 0s linear 0s, opacity 300ms;
-} */
+#pop-up-container{
+    background: rgba(102, 102, 102, 0.5);
+    display: none;
+    position: absolute;
+    
+    width: 100%;
+    height: 100%;
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    
+}
+
+.pop-up-box{
+    /* position */
+    text-align: center;
+    position: sticky;
+    font-weight: bold;
+    width: 50%;
+    background-color: white;
+    /* center of the screen */
+    top: 25%;
+    
+    margin-right: 25%;
+    margin-left: 25%;
+    
+    /* border */
+    border: 3px solid;
+    border-radius: 50px;
+    
+    padding: 15px;
+
+    /* box shadow */
+    /* Als de x-y op 0 wordt gezet wordt de schaduw achter de box geplaatst */
+    box-shadow: 0 0 50px 10px black;
+    
+}
+

@@ -23,13 +23,21 @@ function loadwords() {
     let kaartClass = document.getElementsByClassName('kaart')
 
     for (i=0; i in kaartClass; i++){
+        
+        //console.log('<-- Eerste Nodes -->')
         cardField = kaartClass[i]
-    
-        imgNode = document.createElement('IMG')
-        
-        imgNode.src = 'img/' + random_array[i]
-        
-        cardField.appendChild(imgNode)
+
+        cardChildNodes = cardField.childNodes
+
+        for(x=0; x in cardChildNodes; x++) {
+            
+            node = cardChildNodes[x]
+
+            if(node.tagName == 'IMG'){
+                node.src = 'img/' + random_array[i]
+            }
+            
+        }
         
     }
 }
@@ -48,7 +56,7 @@ stopButton.addEventListener('click', stopGame)
 /* when the startbutton is reset the score, and randomize the cards */
 function startGame(){
     loadwords()
-    console.log('Startgame',previous_kaart)
+    console.log('Startgame')
     
     document.body.style.backgroundColor = '#50A6C2'
     kaart_flip_count = 0;
@@ -56,18 +64,29 @@ function startGame(){
 
     score = 0;
 
+    let height = 0    
+
     var kaart_div = document.getElementsByClassName('kaart');
     //Add for loop
     for (i=0; i in kaart_div; i++){    
         var card = kaart_div[i]
         
         card.addEventListener('click', eventlistener)
-        
     }
+    
+    card_rows = document.getElementsByClassName('card_row')
+
+    for(i=0; i in card_rows; i ++){
+
+        height += card_rows[i].offsetHeight
+    }
+    
+    heightPX = height + 'px'
+
 
     startButton.classList.add('hide')
-    cardContainer.classList.remove('hide')
     stopButton.classList.remove('hide')
+    cardContainer.style.height = heightPX
 }
 /* remove the pictures of the cards and hide the cards */
 function stopGame(){
@@ -82,11 +101,26 @@ function stopGame(){
         
         while(parent.firstChild){
             parent.removeChild(parent.firstChild)
-        }    
+        }
+        
+        imgNode = document.createElement('IMG')
+        imgNode.src = 'img/game_icon.jpg'
+        
+        parent.appendChild(imgNode)
     }
     startButton.classList.remove('hide')
-    cardContainer.classList.add('hide')
+    cardContainer.style.height = '0px'
     stopButton.classList.add('hide')
+}
+
+const popUpBtn = document.getElementById('pop-up-btn')
+const popUpBox = document.getElementById('pop-up-container')
+
+popUpBtn.addEventListener('click', closePopUp)
+
+function closePopUp(){
+    popUpBox.style.display = 'none'
+    console.log('kanker')
 }
 
 var kaart_flip_count = 0;
@@ -94,23 +128,27 @@ var previous_kaart = '';
 
 var score = 0;
 
-const kaart1 = document.getElementById('painting1')
-
-kaart1.addEventListener('transitionend', () => {    
-    console.log('transitie gedaan')    
-})
-
 function eventlistener(e){
-    console.log('<-- Start -->')
+    console.log('<-- Flip -->')
     card = e.currentTarget
     
-    cardImg = card.childNodes[card.childNodes.length -1]
-    console.log('Child Nodes = %s', cardImg)
+    //cardImg = card.childNodes[card.childNodes.length -2]
 
+    cardChildNodes = card.childNodes
+
+    //Get image of Div
+    for (i=0; i in cardChildNodes; i++){
+        node = cardChildNodes[i]
+        console.log(node)
+        
+        if (node.tagName == 'IMG'){
+            cardImg = node
+        }
+    }
+    
     if (previous_kaart != card){
 
-        //cardImg.style.visibility = 'visible'
-
+    
         console.log('Card: %s',card)
         console.log('Prev card: %s', previous_kaart)
 
@@ -118,10 +156,7 @@ function eventlistener(e){
 
         card.classList.add('click')
         
-        
         var cardTransition = card.getTransition
-
-        console.log(cardTransition)
         
         var cardAnimation = cardImg.getAnimations()[0]
         
@@ -134,12 +169,19 @@ function eventlistener(e){
                 //check if 2 cards are flipped
                 console.log('kaart flip count: %s', kaart_flip_count)
                 
-                console.log('opacity: %s', window.getComputedStyle(cardImg).getPropertyValue('opacity'))
+                
                 if (kaart_flip_count == 2 ){
+                    previous_kaartChildNodes = previous_kaart.childNodes
                     
-                    prevCardImg = previous_kaart.childNodes[previous_kaart.childNodes.length -1]
-                    
-                    
+
+                    for (i=0; i in previous_kaartChildNodes; i++){
+                        node = previous_kaartChildNodes[i]
+                        
+                        if (node.tagName == 'IMG'){
+                            prevCardImg = node
+                        }
+                    }
+                     
                     //check if cards are equal
                     if (cardImg.src == prevCardImg.src) {
                         //guess correct
@@ -152,7 +194,11 @@ function eventlistener(e){
 
 
                         if (score == 3){
-                            alert('gefeliciteerd je hebt gewonnen')
+                            
+                            
+
+                            popUpBox.style.display = 'block'
+
                             document.body.style.backgroundColor = 'green'
                         }
 
@@ -169,10 +215,6 @@ function eventlistener(e){
                         card.classList.add('guess_incorrect')
                         previous_kaart.classList.add('guess_incorrect')
                         
-                        
-                        console.log('card: %s',card.innerText)
-                        console.log('prev card: %s', previous_kaart.innerText)
-        
                         let cardAnimation = cardImg.getAnimations()[0]
                         
                         console.log(cardAnimation)

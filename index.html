@@ -44,55 +44,77 @@ Als je een vakje aanklikt draait deze zich om, tot dat er 1 andere is aangeklikt
         <button id="start-btn" class="start-btn btn">Start</button>
         <button id="stop-btn" class="stop-btn btn hide">Stop</button>
         
-        <div id="card-container" class="hide"> 
-            <div class="row">
-                <div class="col-sm-4">
+        <div id="card-container"> 
+            <div class="row card_row">
+                <div class="col-sm-4 padding">
                     <div class='kaart' id='kaart1'>
-                        
+                        <img src="img/game_icon.jpg" srcset="">
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 padding">
                     <div class="kaart" id='kaart2'>
-                    
+                        <img src="img/game_icon.jpg" srcset="">
                     </div>
                 </div>
                 
-                <div class="col-sm-4">
+                <div class="col-sm-4 padding">
                     <div class="kaart" id='kaart3'>
-                    
+                        <img src="img/game_icon.jpg" srcset="">
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-4">
+            <div class="row card_row ">
+                <div class="col-sm-4 padding">
                     <div class='kaart' id='kaart4'>
-                        
+                        <img src="img/game_icon.jpg" srcset="">
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 padding">
                     <div class="kaart" id='kaart5'>
-                        
+                        <img src="img/game_icon.jpg" srcset="">
                     </div>
                 </div>
-                <div class="col-sm-4" >
+                <div class="col-sm-4 padding" >
                     <div class="kaart" id='kaart6'>
-                    
+                        <img src="img/game_icon.jpg" srcset="">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="Container painting">
-        <div class="col-sm-6">
-            <div class="painting" id="painting1">
-                <h3>Hier komt een prachtig schilderij</h3>
+        <div class="painting-container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="painting">
+                        <img src="img/paul_gauguin.jpg" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="painting">
+                        <img src="img/van_gogh.jpg" alt="" srcset="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h2>Paul & Vincent</h2>
+                <p>
+                The two paintings you see above are very special to me.<br> Paul Gaugain painted the left and Vincent van Gogh painted the right
+for van Gogh it was really special the master of painting Paul Gaugain accepted his invitation to visit van Gogh to come to a Arle. In Arle van Gogh wanted to start a new certer for painters in the south of france. 
+Where the next generation of art was being created. But every painter was in Paris, which at the time was the center of art.
+Paul Gaugain accepted his invitation, not for van Gogh but for himself. He needed money. Theo van Gogh, the brother of Vincent, offerd him to buy some of his painting in exchange for him to go to Arle and visit Vincent.
+The first couple of days the weather was pretty bad. But when the sum came and the weather cleared the went to the field to paint
+They went to a place and stood almost side by side. Vincent painted trees you can see in Pauls painting. 
+Almost next to each and painted beatifull paintings with dirrent styles.
+                </p>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="painting">
-                <h3>Hier komt een prachtig schilderij</h3>
+        
+        <div id="pop-up-container">
+            <div class="pop-up-box">
+                <!-- "#" goes back to the top of the screen -->
+                <h3>Congrats you have won!</h3>
+                <h4>Go tell your mom</h4>
+                <button id="pop-up-btn">Close pop-up</button>
             </div>
         </div>
     </div>
