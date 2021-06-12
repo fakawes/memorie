@@ -253,10 +253,3 @@ function eventlistener(e){
         alert('you cannot click the card you already')
     }
 }
-
-// var kaart_div = document.getElementsByClassName('kaart');
-// //Add for loop
-// for (i=0; i in kaart_div; i++){    
-//     var card = kaart_div[i]
-//     card.addEventListener('click', eventlistener)
-// }

@@ -8,9 +8,7 @@
     cursor: pointer;
     text-align: center;
     
-    /* margin-right: 20px;
-    margin-left: 20px;
-    */
+
     margin: auto;
     transition: 1s;
     
@@ -181,8 +179,6 @@ body{
     
     padding: 15px;
 
-    /* box shadow */
-    /* Als de x-y op 0 wordt gezet wordt de schaduw achter de box geplaatst */
     box-shadow: 0 0 50px 10px black;
     
 }
