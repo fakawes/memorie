@@ -66,7 +66,8 @@ function startGame(){
 
     let height = 0    
 
-    var kaart_div = document.getElementsByClassName('kaart');
+    var kaart_div = document.getElementsByClassName('flip-card');
+    
     //Add for loop
     for (i=0; i in kaart_div; i++){    
         var card = kaart_div[i]
@@ -130,10 +131,15 @@ var score = 0;
 
 function eventlistener(e){
     console.log('<-- Flip -->')
-    card = e.currentTarget
     
-    //cardImg = card.childNodes[card.childNodes.length -2]
+    flipCard = e.currentTarget
 
+    flipCardInner = flipCard.childNodes[1]
+
+    flipCardInner.style.transform = "rotateY(180deg)"
+
+    card = flipCardInner.childNodes[3]
+    
     cardChildNodes = card.childNodes
 
     //Get image of Div
@@ -154,100 +160,67 @@ function eventlistener(e){
 
         kaart_flip_count += 1
 
-        card.classList.add('click')
+        console.log('prev flip-card')
         
-        var cardTransition = card.getTransition
-        
-        var cardAnimation = cardImg.getAnimations()[0]
-        
-        cardClick = new Promise(function(resolve, reject) {
-                return  resolve(cardAnimation.finished)
-            });
-
-        cardClick.then(
-            function(result){
-                //check if 2 cards are flipped
-                console.log('kaart flip count: %s', kaart_flip_count)
+        if (kaart_flip_count == 2 ){
+            previous_kaartChildNodes = previous_kaart.childNodes
+            
+            for (i=0; i in previous_kaartChildNodes; i++){
+                node = previous_kaartChildNodes[i]
                 
-                
-                if (kaart_flip_count == 2 ){
-                    previous_kaartChildNodes = previous_kaart.childNodes
-                    
-
-                    for (i=0; i in previous_kaartChildNodes; i++){
-                        node = previous_kaartChildNodes[i]
-                        
-                        if (node.tagName == 'IMG'){
-                            prevCardImg = node
-                        }
-                    }
-                     
-                    //check if cards are equal
-                    if (cardImg.src == prevCardImg.src) {
-                        //guess correct
-                        //add new classes to activate animation
-                                    
-                        score += 1
-
-                        card.classList.add('guess_correct')
-                        previous_kaart.classList.add('guess_correct')
-
-
-                        if (score == 6){
-                            
-                            
-
-                            popUpBox.style.display = 'block'
-
-                            document.body.style.backgroundColor = 'green'
-                        }
-
-                        card.removeEventListener('click', eventlistener)
-                        previous_kaart.removeEventListener('click',eventlistener)
-
-                        previous_kaart = '';
-                        kaart_flip_count = 0;
-                        console.log('<-- End of success -->')
-                    }
-                    else{
-                        //Guess incorrect
-                        //add new classes to activate animation
-                        card.classList.add('guess_incorrect')
-                        previous_kaart.classList.add('guess_incorrect')
-                        
-                        let cardAnimation = cardImg.getAnimations()[0]
-                        
-                        console.log(cardAnimation)
-
-                        //Wait for animation to finish, then return to normal state
-                        returnDefaultStyle = new Promise(function(resolve, reject){
-                            return resolve(cardAnimation.finished)
-                        })
-                        returnDefaultStyle.then(
-                            function(){
-                                
-                                prevCardText = previous_kaart.childNodes[1]
-                                //Make cards not invisible
-                                
-                                card.classList.remove('guess_incorrect','click')
-                                previous_kaart.classList.remove('guess_incorrect','click')
-                                
-                                previous_kaart = '';
-                                kaart_flip_count = 0;
-                                console.log('<-- End of incorrect animation -->')
-
-                            }
-                        )                    
-                    }
-                      
+                if (node.tagName == 'IMG'){
+                    prevCardImg = node
                 }
-                else{
-                    previous_kaart = card;
-                    console.log('<-- End of 1 card clicked -->')
-                }    
-                console.log('<-- Final End -->')
             }
-        )             
+                
+            //check if cards are equal
+            if (cardImg.src == prevCardImg.src) {
+                //guess correct
+                //add new classes to activate animation
+                                
+                score += 1
+
+                // card.classList.add('guess_correct')
+                // previous_kaart.classList.add('guess_correct')
+                if (score == 6){
+                
+                        popUpBox.style.display = 'block'
+
+                        document.body.style.backgroundColor = 'green'
+                    }
+
+                    card.removeEventListener('click', eventlistener)
+                    previous_kaart.removeEventListener('click',eventlistener)
+
+                    previous_kaart = '';
+                    kaart_flip_count = 0;
+            }
+            else{
+                //Guess incorrect
+                //add new classes to activate animation
+                
+                setTimeout(function(){
+                    flipCardInner.style.transform = "rotateY(0deg)"
+
+                    prevFlipCardInner = previous_kaart.parentNode
+    
+                    prevFlipCardInner.style.transform = "rotateY(0deg)"
+
+                    previous_kaart = '';
+                },2000)
+    
+                kaart_flip_count = 0;
+                console.log('<-- End of incorrect-->')
+        
+                }
+        }
+        else{
+            previous_kaart = card;
+            console.log('<-- End of 1 card clicked -->')
+        }    
+        console.log('<-- Final End -->')
+            
+                     
     }
     else {
         alert('you cannot click the card you already')
