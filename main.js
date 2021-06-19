@@ -6,7 +6,7 @@ function loadwords() {
     
     var kaart_array = new Array();
     /* To-Do: leest de bestanden uit de map uit en maak een automatische lijst van */
-    var kaarten = ['dog.jpg', 'dog.jpg', 'kat.jpg', 'kat.jpg', 'muis.jpg', 'muis.jpg']
+    var kaarten = ['dog.jpg', 'dog.jpg', 'kat.jpg', 'kat.jpg', 'muis.jpg', 'muis.jpg' ,'olifant.jpg', 'olifant.jpg', 'giraffe.jpg', 'giraffe.jpg', 'meerkoet.jpg', 'meerkoet.jpg' ]
 
     random_array = new Array();
     
@@ -120,7 +120,7 @@ popUpBtn.addEventListener('click', closePopUp)
 
 function closePopUp(){
     popUpBox.style.display = 'none'
-    console.log('kanker')
+    
 }
 
 var kaart_flip_count = 0;
@@ -193,7 +193,7 @@ function eventlistener(e){
                         previous_kaart.classList.add('guess_correct')
 
 
-                        if (score == 3){
+                        if (score == 6){
                             
                             
 
