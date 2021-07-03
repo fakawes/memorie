@@ -91,23 +91,20 @@ function startGame(){
 }
 /* remove the pictures of the cards and hide the cards */
 function stopGame(){
-    
+    console.log('\n<-- stop game -->')
     let kaartDivs = document.getElementsByClassName('kaart')
 
     for(i=0; i in kaartDivs; i++){
         
-        parent = kaartDivs[i]
+        card = kaartDivs[i]
 
-        parent.classList.remove('click','guess_correct')
+        // parent.classList.remove('click','guess_correct')
         
-        while(parent.firstChild){
-            parent.removeChild(parent.firstChild)
-        }
-        
-        imgNode = document.createElement('IMG')
-        imgNode.src = 'img/game_icon.jpg'
-        
-        parent.appendChild(imgNode)
+        flipCardInner = card.parentNode
+
+        flipCardInner.style.transform = "rotateY(0deg)"
+        console.log('card reset')
+
     }
     startButton.classList.remove('hide')
     cardContainer.style.height = '0px'

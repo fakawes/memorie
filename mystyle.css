@@ -58,7 +58,8 @@
     transition: transform 2s;
 }
 .flip-card-front{
-    background-color: #2E2E2E;
+    /* background-color: #2E2E2E; */
+    background-image: url('img/moroccan-flower-dark.png');
     border-radius: 25px;
 }
 
@@ -75,7 +76,7 @@
 
 .flip-card-back{
     transform: rotateY(180deg);
-    background-color: #2E2E2E;
+    
     border-radius: 25px;
 }
 
